@@ -1,0 +1,44 @@
+import { Box, HStack, Text, VStack } from '@chakra-ui/react';
+import { FC } from 'react';
+import { format } from 'date-fns';
+
+import { IMessage } from '../../common/types';
+
+interface IChatView {
+    messages: Array<IMessage>;
+}
+
+const currentUser = '22';
+
+const ChatView: FC<IChatView> = ({ messages }) => {
+    return (
+        <Box h="full" w="full">
+            {messages.map(({ body, senderId, timestamp }) => {
+                const isCurrentUser = currentUser === senderId;
+                return (
+                    <HStack justifyContent={isCurrentUser ? 'end' : 'start'} mb="4px">
+                        <VStack
+                            maxW="80%"
+                            px="10px"
+                            py="4px"
+                            bg={isCurrentUser ? '#44447F' : '#191919'}
+                            rounded="10px"
+                            alignItems="start"
+                            spacing={0}
+                            // _after={{
+                            //     content: '',
+                            //     h: '30px',
+                            //     w: '30px',
+                            // }}
+                        >
+                            <Text fontSize="sm">{body}</Text>
+                            <Text fontSize="8px">{format(timestamp, 'hh:mm')}</Text>
+                        </VStack>
+                    </HStack>
+                );
+            })}
+        </Box>
+    );
+};
+
+export default ChatView;
