@@ -16,7 +16,11 @@ const ChatView: FC<IChatView> = ({ messages }) => {
             {messages.map(({ body, senderId, timestamp }) => {
                 const isCurrentUser = currentUser === senderId;
                 return (
-                    <HStack justifyContent={isCurrentUser ? 'end' : 'start'} mb="4px">
+                    <HStack
+                        key={`${senderId}-${timestamp}`}
+                        justifyContent={isCurrentUser ? 'end' : 'start'}
+                        mb="4px"
+                    >
                         <VStack
                             maxW="80%"
                             px="10px"
@@ -32,7 +36,9 @@ const ChatView: FC<IChatView> = ({ messages }) => {
                             // }}
                         >
                             <Text fontSize="sm">{body}</Text>
-                            <Text fontSize="8px">{format(timestamp, 'hh:mm')}</Text>
+                            <Text fontSize="10px" ml="auto">
+                                {format(timestamp, 'hh:mm')}
+                            </Text>
                         </VStack>
                     </HStack>
                 );
