@@ -16,7 +16,8 @@ export const Router: FC = () => {
                 <Route path="/sign-up" element={<SignUpForm />} />
             </Route>
             <Route path={PAGE_ROUTES.DASHBOARD_PAGE} element={<DashboardLayout />}>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard/bot-chat" element={<Dashboard />} />
+                <Route path="/dashboard/human-chat" element={<Dashboard />} />
             </Route>
         </Routes>
     );

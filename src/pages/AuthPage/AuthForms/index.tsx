@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, Center, Text, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -19,10 +19,13 @@ const AuthForms: FC = () => {
             py="16"
             w="full"
         >
-            <Box h="10">
-                <Logo hideFrom="md" />
-            </Box>
-            <VStack alignItems="start" h="full" justifyContent="center" mt="-10">
+            <VStack alignItems="start" h="full" justifyContent="center">
+                <Center w="full" mb="10">
+                    <VStack>
+                        <Logo />
+                        <Text>ZIKU</Text>
+                    </VStack>
+                </Center>
                 <Outlet />
             </VStack>
         </Box>

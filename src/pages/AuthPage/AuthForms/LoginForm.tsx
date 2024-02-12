@@ -10,15 +10,20 @@ import {
 } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { PAGE_ROUTES } from '../../../common/types';
 import Button from '../../../components/Form/Button';
 
 const LoginForm: FC = () => {
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
     const handleClick = () => setShow(!show);
+    const login = () => {
+        console.log('okay');
+        navigate('/dashboard');
+    };
 
     return (
         <form style={{ width: '100%' }}>
@@ -67,7 +72,7 @@ const LoginForm: FC = () => {
                     <Text fontSize="small">Forgot Password?</Text>
                 </Link>
             </HStack>
-            <Button>Log in</Button>
+            <Button onClick={login}>Log in</Button>
             <HStack justifyContent="center" mt="6">
                 <Text fontSize="small">Don't have an account?</Text>
                 <Link to={PAGE_ROUTES.SIGN_UP}>

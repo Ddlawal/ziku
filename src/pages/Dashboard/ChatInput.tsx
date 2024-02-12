@@ -1,5 +1,5 @@
 import { Box, Button, FormControl, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { ChangeEventHandler, FC, useState } from 'react';
+import { ChangeEventHandler, FC, KeyboardEventHandler, useState } from 'react';
 import { BsSendFill } from 'react-icons/bs';
 import { IMessage } from '../../common/types';
 
@@ -17,6 +17,11 @@ const ChatInput: FC<IChatInput> = ({ handleSendMessage }) => {
 
         handleSendMessage(data);
         setMessage('');
+    };
+    const handleEnterKeyPress: KeyboardEventHandler<HTMLInputElement> = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
     };
 
     return (
@@ -38,6 +43,7 @@ const ChatInput: FC<IChatInput> = ({ handleSendMessage }) => {
                         value={message}
                         border="none"
                         onChange={handleClick}
+                        onKeyUp={handleEnterKeyPress}
                     />
                     <InputRightElement>
                         <Button

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import io from 'socket.io-client';
-import { EVENTS, IEventsData } from '../common/constants';
+import { EVENTS, IEventsData } from '../common/types';
 
 export const useSocket = (cbs: IEventsData) => {
     useEffect(() => {

@@ -46,3 +46,28 @@ body {
         background-color: #f9f9f9;
     }
 }
+
+/******************************
+    Custom ScrollBar
+******************************/
+.customScrollBar {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: lavender red;
+}
+
+.customScrollBar::-webkit-scrollbar {
+    width: 2px;
+    display: block;
+}
+
+.customScrollBar::-webkit-scrollbar-track {
+    width: 2px;
+    background: lavender;
+    border-radius: 9999px;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb {
+    background-color: red;
+    border-radius: 9999px;
+}
