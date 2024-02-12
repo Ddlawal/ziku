@@ -20,23 +20,29 @@ const ChatInput: FC<IChatInput> = ({ handleSendMessage }) => {
     };
 
     return (
-        <Box w="full" pb="10px">
+        <Box
+            bg="linear-gradient(to bottom right, white -100%, rgba(0, 0, 0, 0) 110%)"
+            borderRadius="8px"
+            p="1px"
+            w="full"
+        >
             <FormControl isInvalid={false}>
                 <InputGroup size="md">
                     <Input
                         m={0}
                         type={'text'}
                         placeholder="Type here..."
-                        bg="gray.300"
-                        color="black"
+                        bg="bg"
+                        color="white"
                         _focusVisible={{}}
                         value={message}
+                        border="none"
                         onChange={handleClick}
                     />
                     <InputRightElement>
                         <Button
                             bg="transparent"
-                            color="black"
+                            color="white"
                             size="sm"
                             _hover={{}}
                             _active={{}}

@@ -1,12 +1,12 @@
-import { Container } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
 
-import Home from './pages/Home';
+import { Router } from './routes';
 
 function App() {
     return (
-        <Container w="100vw" h="100vh">
-            <Home />
-        </Container>
+        <Center w="100vw" h="100vh">
+            <Router />
+        </Center>
     );
 }
 

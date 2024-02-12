@@ -16,9 +16,7 @@ const ChatArea: FC = () => {
 
     return (
         <VStack
-            border="1px solid lavender"
-            borderLeft="none"
-            borderRight="none"
+            border="none"
             h="75vh"
             w={{ base: '30rem' }}
             overflow="hidden"
@@ -26,7 +24,6 @@ const ChatArea: FC = () => {
             px="10px"
         >
             <ChatView messages={messages} />
-            <Divider color="red" size="10" w="full" borderColor="red" />
             <ChatInput handleSendMessage={handleSendMessage} />
         </VStack>
     );
