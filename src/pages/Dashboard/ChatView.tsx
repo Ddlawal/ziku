@@ -2,7 +2,8 @@ import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 import { format } from 'date-fns';
 
-import { IMessage } from '../../common/types';
+import { ChatHandler, IMessage } from '../../common/types';
+import useStore from '../../hooks/useStore';
 
 interface IChatView {
     messages: Array<IMessage>;
@@ -11,6 +12,9 @@ interface IChatView {
 const currentUser = '22';
 
 const ChatView: FC<IChatView> = ({ messages }) => {
+    const { store } = useStore();
+    console.log(store);
+
     return (
         <VStack h="full" w="full" justifyContent="end">
             {messages.length ? (
@@ -55,7 +59,9 @@ const ChatView: FC<IChatView> = ({ messages }) => {
                 </Box>
             ) : (
                 <VStack h="full" justifyContent="center">
-                    <Text fontSize="2rem">Chat with Ziku</Text>
+                    <Text fontSize="2rem">
+                        Chat with {store.chatHandler === ChatHandler.BOT ? 'Ziku' : 'a psychic'}
+                    </Text>
                 </VStack>
             )}
         </VStack>

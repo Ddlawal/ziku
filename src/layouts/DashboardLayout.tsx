@@ -15,11 +15,23 @@ import { FC } from 'react';
 import { IoSettings } from 'react-icons/io5';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import { PAGE_ROUTES } from '../common/types';
+import { ChatHandler, PAGE_ROUTES } from '../common/types';
 import Logo from '../components/Logo';
+import useStore from '../hooks/useStore';
 
 const DashboardLayout: FC = () => {
     const navigate = useNavigate();
+    const { updateStore } = useStore();
+
+    const setChatHandler = (handler: ChatHandler) => {
+        updateStore({ chatHandler: handler });
+
+        if (handler === ChatHandler.BOT) {
+            navigate(PAGE_ROUTES.BOT_CHAT);
+        } else {
+            navigate(PAGE_ROUTES.HUMAN_CHAT);
+        }
+    };
 
     return (
         <Center w="full" h="full" px="8%" pos="relative">
@@ -35,7 +47,7 @@ const DashboardLayout: FC = () => {
                             borderTopRadius: '10px',
                         }}
                         cursor="pointer"
-                        onClick={() => navigate(PAGE_ROUTES.BOT_CHAT)}
+                        onClick={() => setChatHandler(ChatHandler.BOT)}
                     >
                         Ziku
                     </Tab>
@@ -46,7 +58,7 @@ const DashboardLayout: FC = () => {
                             borderTopRadius: '10px',
                         }}
                         cursor="pointer"
-                        onClick={() => navigate(PAGE_ROUTES.HUMAN_CHAT)}
+                        onClick={() => setChatHandler(ChatHandler.HUMAN)}
                     >
                         PSychic
                     </Tab>

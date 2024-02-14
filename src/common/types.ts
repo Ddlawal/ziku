@@ -28,3 +28,21 @@ export enum ChatHandler {
     HUMAN = 'human',
     BOT = 'bot',
 }
+
+export interface IUser {
+    email: string;
+    firstName: string;
+    fullName: string;
+    id: string;
+    lastName: string;
+}
+
+export interface IStore {
+    chatHandler: ChatHandler;
+    currentUser: IUser | null;
+}
+
+export interface IStoreContext {
+    store: IStore;
+    updateStore: (payload: Partial<IStore>) => void;
+}
