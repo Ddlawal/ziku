@@ -10,7 +10,6 @@ import {
     TabPanels,
     Tabs,
     Text,
-    VStack,
 } from '@chakra-ui/react';
 import { FC } from 'react';
 import { IoSettings } from 'react-icons/io5';
@@ -58,14 +57,7 @@ const DashboardLayout: FC = () => {
                     </HStack>
                 </TabList>
                 <TabIndicator mt="0.2px" height="2px" bg="white" borderRadius="1px" />
-                <Box
-                    // bgGradient="linear(to-br, white -100%, rgba(0, 0, 0, 0) 110%)"
-                    borderBottomRadius="30px"
-                    border="1px solid gray"
-                    h="95%"
-                    w="full"
-                    p="1px"
-                >
+                <Box borderBottomRadius="30px" border="1px solid gray" h="95%" w="full" p="1px">
                     <TabPanels h="full">
                         <TabPanel h="full">
                             <Outlet />
