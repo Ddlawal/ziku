@@ -11,22 +11,27 @@ import {
 import { FC, useState } from 'react';
 import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { PAGE_ROUTES } from '../../../common/types';
+import { ILoginRequest, loginRequest } from '../../../apis/auth';
+import { IUser, PAGE_ROUTES } from '../../../common/types';
 import Button from '../../../components/Form/Button';
+import useLocalMutation from '../../../hooks/useLocalMutation';
 
 const LoginForm: FC = () => {
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
+    const { formState, register, handleSubmit } = useForm<ILoginRequest>();
+    const { mutate } = useLocalMutation<IUser, ILoginRequest>({
+        mutationFn: ({ email, password }) => loginRequest({ email, password }),
+        onSuccess: () => navigate('/dashboard'),
+    });
 
     const handleClick = () => setShow(!show);
-    const login = () => {
-        console.log('okay');
-        navigate('/dashboard');
-    };
+    const login: SubmitHandler<ILoginRequest> = (data) => mutate(data);
 
     return (
-        <form style={{ width: '100%' }}>
+        <form style={{ width: '100%' }} onSubmit={handleSubmit(login)}>
             <FormControl isInvalid={false} mb="3">
                 <Input
                     type="email"
@@ -35,6 +40,7 @@ const LoginForm: FC = () => {
                     bg="white"
                     color="primary"
                     _focusVisible={{}}
+                    {...register('email', { required: true })}
                 />
                 <Box h="5">
                     <FormErrorMessage>Email is required.</FormErrorMessage>
@@ -49,6 +55,7 @@ const LoginForm: FC = () => {
                         bg="white"
                         color="primary"
                         _focusVisible={{}}
+                        {...register('password', { required: true })}
                     />
                     <InputRightElement width="4.5rem">
                         <Button
@@ -72,7 +79,9 @@ const LoginForm: FC = () => {
                     <Text fontSize="small">Forgot Password?</Text>
                 </Link>
             </HStack>
-            <Button onClick={login}>Log in</Button>
+            <Button type="submit" isDisabled={formState.disabled}>
+                Log in
+            </Button>
             <HStack justifyContent="center" mt="6">
                 <Text fontSize="small">Don't have an account?</Text>
                 <Link to={PAGE_ROUTES.SIGN_UP}>

@@ -15,6 +15,12 @@ export enum PAGE_ROUTES {
     SIGN_UP = '/sign-up',
 }
 
+export interface IResponse<D = any> {
+    data?: D;
+    status?: number;
+    message?: string;
+}
+
 export type IEvents = keyof typeof EVENTS;
 export type IEventsData = Partial<Record<EVENTS, (data: any) => void>>;
 
@@ -45,4 +51,20 @@ export interface IStore {
 export interface IStoreContext {
     store: IStore;
     updateStore: (payload: Partial<IStore>) => void;
+}
+
+export interface IDelete {
+    url: string;
+}
+
+export interface IPost<T = Record<string, unknown>> extends IDelete {
+    body?: T;
+}
+
+export type IPatch<T = Record<string, unknown>> = IPost<T>;
+
+export type IPut<T = Record<string, unknown>> = IPost<T>;
+
+export interface IGet<T = Record<string, unknown>> extends IDelete {
+    query?: T;
 }

@@ -4,17 +4,20 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import Context from './context';
+import Context from './providers/context.provider';
 import './index.css';
 import { theme } from './styles/theme';
+import LocalQueryClientProvider from './providers/queryClient.provider';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
             <BrowserRouter>
-                <Context>
-                    <App />
-                </Context>
+                <LocalQueryClientProvider>
+                    <Context>
+                        <App />
+                    </Context>
+                </LocalQueryClientProvider>
             </BrowserRouter>
         </ChakraProvider>
     </React.StrictMode>
