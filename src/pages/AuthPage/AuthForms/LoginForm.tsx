@@ -17,14 +17,21 @@ import { ILoginRequest, loginRequest } from '../../../apis/auth';
 import { IUser, PAGE_ROUTES } from '../../../common/types';
 import Button from '../../../components/Form/Button';
 import useLocalMutation from '../../../hooks/useLocalMutation';
+import useStore from '../../../hooks/useStore';
 
 const LoginForm: FC = () => {
-    const [show, setShow] = useState(false);
     const navigate = useNavigate();
+    const { updateStore } = useStore();
+
+    const [show, setShow] = useState(false);
     const { formState, register, handleSubmit } = useForm<ILoginRequest>();
     const { mutate } = useLocalMutation<IUser, ILoginRequest>({
         mutationFn: ({ email, password }) => loginRequest({ email, password }),
-        onSuccess: () => navigate('/dashboard'),
+        onSuccess: (res) => {
+            console.log(res);
+            updateStore({ currentUser: res.data });
+            navigate(PAGE_ROUTES.BOT_CHAT);
+        },
     });
 
     const handleClick = () => setShow(!show);

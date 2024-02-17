@@ -7,10 +7,10 @@ export enum EVENTS {
 }
 
 export enum PAGE_ROUTES {
-    BOT_CHAT = 'bot-chat',
+    BOT_CHAT = '/dashboard/bot-chat',
     DASHBOARD_PAGE = '/dashboard',
     FORGOT_PASSWORD = '/forgot-password',
-    HUMAN_CHAT = 'human-chat',
+    HUMAN_CHAT = '/dashboard/human-chat',
     SETTINGS_PAGE = '/dashboard/settings',
     SIGN_UP = '/sign-up',
 }

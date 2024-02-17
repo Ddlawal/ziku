@@ -1,7 +1,7 @@
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react';
 import { ChatHandler, IStore, IStoreContext, IUser } from '../common/types';
 
-const data = localStorage.getItem('auth');
+const data = localStorage.getItem('currentUser');
 const currentUser = data ? (JSON.parse(data) as IUser) : null;
 
 export const initialState: IStore = {
@@ -16,6 +16,11 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
 
     const updateStore = useCallback((payload: Partial<IStore>) => {
         setStore((prev) => ({ ...prev, ...payload }));
+        const payloadArray = Object.entries(payload);
+
+        payloadArray.forEach(([key, value]) => {
+            localStorage.setItem(key, JSON.stringify(value));
+        });
     }, []);
 
     const contextValue = useMemo(
