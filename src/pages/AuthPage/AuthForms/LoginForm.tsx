@@ -13,8 +13,8 @@ import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { ILoginRequest, loginRequest } from '../../../apis/auth';
-import { IUser, PAGE_ROUTES } from '../../../common/types';
+import { loginRequest } from '../../../apis/auth';
+import { ILoginRequest, IUser, PAGE_ROUTES } from '../../../common/types';
 import Button from '../../../components/Form/Button';
 import useLocalMutation from '../../../hooks/useLocalMutation';
 import useStore from '../../../hooks/useStore';
@@ -28,7 +28,6 @@ const LoginForm: FC = () => {
     const { mutate } = useLocalMutation<IUser, ILoginRequest>({
         mutationFn: ({ email, password }) => loginRequest({ email, password }),
         onSuccess: (res) => {
-            console.log(res);
             updateStore({ currentUser: res.data });
             navigate(PAGE_ROUTES.BOT_CHAT);
         },
@@ -78,7 +77,7 @@ const LoginForm: FC = () => {
                     </InputRightElement>
                 </InputGroup>
                 <Box h="5">
-                    <FormErrorMessage>Email is required.</FormErrorMessage>
+                    <FormErrorMessage>Password is required.</FormErrorMessage>
                 </Box>
             </FormControl>
             <HStack justifyContent="end" mb="8">
@@ -91,7 +90,7 @@ const LoginForm: FC = () => {
             </Button>
             <HStack justifyContent="center" mt="6">
                 <Text fontSize="small">Don't have an account?</Text>
-                <Link to={PAGE_ROUTES.SIGN_UP}>
+                <Link to={PAGE_ROUTES.SEND_EMAIL_CONFIRMATION}>
                     <Text as="span" color="#20b2aa">
                         Sign up
                     </Text>

@@ -1,12 +1,18 @@
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react';
-import { ChatHandler, IStore, IStoreContext, IUser } from '../common/types';
+import { ChatHandler, IAuth, IStore, IStoreContext, IUser } from '../common/types';
 
 const data = localStorage.getItem('currentUser');
 const currentUser = data ? (JSON.parse(data) as IUser) : null;
+const authData = localStorage.getItem('auth');
+const auth = authData ? (JSON.parse(authData) as IAuth) : null;
 
 export const initialState: IStore = {
     chatHandler: ChatHandler.BOT,
     currentUser,
+    auth: {
+        confirmationId: auth?.confirmationId || null,
+        confirmationEmail: auth?.confirmationEmail || null,
+    },
 };
 
 export const StoreContext = createContext<IStoreContext | null>(null);

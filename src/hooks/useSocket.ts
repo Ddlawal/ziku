@@ -6,7 +6,6 @@ export const useSocket = (cbs: IEventsData) => {
     useEffect(() => {
         const socket = io('http://localhost:9000');
         socket.on('connect', () => console.log('Con'));
-        console.log('first');
         socket.on(EVENTS.AUTH, (data) => {
             console.log('auth', data);
             if (data.connected) {

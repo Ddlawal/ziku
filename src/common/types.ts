@@ -11,8 +11,10 @@ export enum PAGE_ROUTES {
     DASHBOARD_PAGE = '/dashboard',
     FORGOT_PASSWORD = '/forgot-password',
     HUMAN_CHAT = '/dashboard/human-chat',
+    SEND_EMAIL_CONFIRMATION = '/send-email-confirmation',
     SETTINGS_PAGE = '/dashboard/settings',
     SIGN_UP = '/sign-up',
+    VALIDATE_EMAIL_CONFIRMATION = '/validate-email-confirmation',
 }
 
 export interface IResponse<D = any> {
@@ -30,6 +32,36 @@ export interface IMessage {
     senderId: string;
 }
 
+export interface ILoginRequest {
+    email: string;
+    password: string;
+}
+export interface ISignUpRequest {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
+export interface ISendEmailConfirmation {
+    email: string;
+}
+
+export interface IValidateEmailConfirmation {
+    code: string;
+    id: string;
+}
+
+export interface IEmailConfirmation {
+    id: string;
+    confirmed: boolean;
+    count: number;
+    email: string;
+    expiresAt: Date;
+    retryAt: Date;
+}
+
 export enum ChatHandler {
     HUMAN = 'human',
     BOT = 'bot',
@@ -43,9 +75,15 @@ export interface IUser {
     lastName: string;
 }
 
+export interface IAuth {
+    confirmationEmail: string | null;
+    confirmationId: string | null;
+}
+
 export interface IStore {
     chatHandler: ChatHandler;
     currentUser: IUser | null;
+    auth: IAuth;
 }
 
 export interface IStoreContext {

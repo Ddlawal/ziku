@@ -15,12 +15,13 @@ const AuthGuard: FC<IAuthGuard> = ({ children }) => {
     const { pathname } = useLocation();
 
     const navigate = useNavigate();
-    console.log(authenticating);
 
     useEffect(() => {
-        if (!store.currentUser) {
-            setTimeout(() => navigate('/', { replace: true }), 1000);
-        } else if (!pathname.includes('dashboard')) {
+        if (pathname.includes('dashboard')) {
+            if (!store.currentUser) {
+                setTimeout(() => navigate('/', { replace: true }), 1000);
+            }
+        } else if (store.currentUser) {
             setTimeout(() => navigate(PAGE_ROUTES.BOT_CHAT, { replace: true }), 1000);
         }
 

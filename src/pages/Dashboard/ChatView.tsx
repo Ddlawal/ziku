@@ -13,7 +13,6 @@ const currentUser = '22';
 
 const ChatView: FC<IChatView> = ({ messages }) => {
     const { store } = useStore();
-    console.log(store);
 
     return (
         <VStack h="full" w="full" justifyContent="end">
