@@ -15,7 +15,14 @@ const ChatArea: FC = () => {
     useSocket({ [EVENTS.NEW_CONVERSATION]: (data) => setMessage((prev) => [...prev, data]) });
 
     return (
-        <VStack border="none" h="full" w="full" overflow="hidden" rounded="10px" px="20%">
+        <VStack
+            border="none"
+            h="full"
+            w="full"
+            overflow="hidden"
+            rounded="10px"
+            px={{ base: '5%', md: '15%' }}
+        >
             <ChatView messages={messages} />
             <ChatInput handleSendMessage={handleSendMessage} />
         </VStack>

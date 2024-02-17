@@ -6,19 +6,7 @@ import Logo from '../../../components/Logo';
 
 const AuthForms: FC = () => {
     return (
-        <Box
-            h="100vh"
-            px={{
-                base: '10',
-                sm: '28',
-                md: '10',
-                lg: '20',
-                xl: '20',
-                '3xl': '40',
-            }}
-            py="16"
-            w="full"
-        >
+        <Box h="100vh" px="10" py="16" w="full">
             <VStack alignItems="start" h="full" justifyContent="center">
                 <Center w="full" mb="10">
                     <VStack>
