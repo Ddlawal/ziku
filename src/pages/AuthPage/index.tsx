@@ -5,7 +5,7 @@ import AuthForms from './AuthForms';
 
 const AuthPage: FC = () => {
     return (
-        <HStack w={{ base: '80%', sm: '70%', md: '50%', lg: '30rem' }}>
+        <HStack w={{ base: 'full', sm: '80%', md: '30rem', lg: '30rem' }}>
             <AuthForms />
         </HStack>
     );

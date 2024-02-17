@@ -2,16 +2,16 @@ import { extendTheme } from '@chakra-ui/react';
 
 const breakpoints = {
     base: '0em',
-    xs: '40rem',
-    sm: '40rem',
-    md: '48em',
-    lg: '62em',
-    xl: '80em',
-    '2xl': '85.375em',
-    '3xl': '90em',
-    '4xl': '96em',
+    xs: '22.5rem',
+    sm: '30rem',
+    md: '48rem',
+    lg: '62rem',
+    xl: '80rem',
+    '2xl': '85.375rem',
+    '3xl': '90rem',
+    '4xl': '96rem',
     '5xl': '108rem',
-    '6xl': '120em',
+    '6xl': '120rem',
 };
 const colors = {
     bg: '#11071E',
