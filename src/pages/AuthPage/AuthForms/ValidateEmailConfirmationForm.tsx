@@ -16,17 +16,18 @@ const ValidateEmailConfirmationForm: FC = () => {
 
     const { formState, register, handleSubmit } = useForm<Omit<IValidateEmailConfirmation, 'id'>>();
 
-    const { mutate } = useLocalMutation<IEmailConfirmation, Omit<IValidateEmailConfirmation, 'id'>>(
-        {
-            mutationFn: ({ code }) =>
-                validateEmailConfirmationRequest({ code, id: state.confirmationId }),
-            onSuccess: (res) => {
-                const data = res.data as IEmailConfirmation;
-                updateStore({ auth: { confirmationEmail: data?.email, confirmationId: data?.id } });
-                navigate(PAGE_ROUTES.SIGN_UP, { state: { email: res.data?.email } });
-            },
-        }
-    );
+    const { isPending, mutate } = useLocalMutation<
+        IEmailConfirmation,
+        Omit<IValidateEmailConfirmation, 'id'>
+    >({
+        mutationFn: ({ code }) =>
+            validateEmailConfirmationRequest({ code, id: state.confirmationId }),
+        onSuccess: (res) => {
+            const data = res.data as IEmailConfirmation;
+            updateStore({ auth: { confirmationEmail: data?.email, confirmationId: data?.id } });
+            navigate(PAGE_ROUTES.SIGN_UP, { state: { email: res.data?.email } });
+        },
+    });
 
     const validateConfirmationCode: SubmitHandler<Omit<IValidateEmailConfirmation, 'id'>> = (
         data
@@ -50,7 +51,7 @@ const ValidateEmailConfirmationForm: FC = () => {
                     <FormErrorMessage>Email is required.</FormErrorMessage>
                 </Box>
             </FormControl>
-            <Button type="submit" isDisabled={formState.disabled}>
+            <Button type="submit" isLoading={isPending} isDisabled={formState.disabled}>
                 Submit
             </Button>
             <HStack justifyContent="center" mt="6">

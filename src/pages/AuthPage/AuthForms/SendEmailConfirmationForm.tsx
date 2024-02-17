@@ -13,7 +13,7 @@ const SendEmailConfirmationForm: FC = () => {
 
     const { formState, register, handleSubmit } = useForm<ISendEmailConfirmation>();
 
-    const { mutate } = useLocalMutation<IEmailConfirmation, ISendEmailConfirmation>({
+    const { isPending, mutate } = useLocalMutation<IEmailConfirmation, ISendEmailConfirmation>({
         mutationFn: ({ email }) => sendEmailConfirmationRequest({ email }),
         onSuccess: (res) => {
             navigate(PAGE_ROUTES.VALIDATE_EMAIL_CONFIRMATION, {
@@ -40,7 +40,7 @@ const SendEmailConfirmationForm: FC = () => {
                     <FormErrorMessage>Email is required.</FormErrorMessage>
                 </Box>
             </FormControl>
-            <Button type="submit" isDisabled={formState.disabled}>
+            <Button type="submit" isLoading={isPending} isDisabled={formState.disabled}>
                 Submit
             </Button>
             <HStack justifyContent="center" mt="6">
