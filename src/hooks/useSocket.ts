@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import io from 'socket.io-client';
+import { BASE_URL } from '../common/env';
 import { EVENTS, IEventsData } from '../common/types';
 
 export const useSocket = (cbs: IEventsData) => {
     useEffect(() => {
-        const socket = io('http://localhost:9000');
+        const socket = io(BASE_URL);
         socket.on('connect', () => console.log('Con'));
         socket.on(EVENTS.AUTH, (data) => {
             console.log('auth', data);

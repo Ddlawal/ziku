@@ -25,7 +25,7 @@ const LoginForm: FC = () => {
 
     const [show, setShow] = useState(false);
     const { formState, register, handleSubmit } = useForm<ILoginRequest>();
-    const { mutate } = useLocalMutation<IUser, ILoginRequest>({
+    const { isPending, mutate } = useLocalMutation<IUser, ILoginRequest>({
         mutationFn: ({ email, password }) => loginRequest({ email, password }),
         onSuccess: (res) => {
             updateStore({ currentUser: res.data });
@@ -85,7 +85,7 @@ const LoginForm: FC = () => {
                     <Text fontSize="small">Forgot Password?</Text>
                 </Link>
             </HStack>
-            <Button type="submit" isDisabled={formState.disabled}>
+            <Button type="submit" isLoading={isPending} isDisabled={formState.disabled}>
                 Log in
             </Button>
             <HStack justifyContent="center" mt="6">
