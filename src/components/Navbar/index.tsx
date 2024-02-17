@@ -74,9 +74,18 @@ const Navbar: FC = () => {
                 <HStack w="full" justifyContent="end" spacing={3}>
                     <Menu>
                         <MenuButton as={Button} p={0} bg="transparent" _hover={{}} _active={{}}>
-                            <HStack spacing={3}>
+                            <HStack spacing={3} justifyContent="end">
                                 <Avatar w="1.2rem" h="1.2rem" />
-                                <Text color="lavender">{store.currentUser?.fullName}</Text>
+                                <Text
+                                    color="lavender"
+                                    hideBelow="sm"
+                                    overflow="hidden"
+                                    textOverflow="ellipsis"
+                                    whiteSpace="nowrap"
+                                    w={{ base: '10rem', md: 'full' }}
+                                >
+                                    {store.currentUser?.fullName}
+                                </Text>
                             </HStack>
                         </MenuButton>
                         <MenuList color="primary">
