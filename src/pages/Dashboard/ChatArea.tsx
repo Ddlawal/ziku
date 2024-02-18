@@ -12,7 +12,7 @@ const ChatArea: FC = () => {
 
     const handleSendMessage = (msg: IMessage) => setMessage((prev) => [...prev, msg]);
 
-    useSocket({ [EVENTS.NEW_CONVERSATION]: (data) => setMessage((prev) => [...prev, data]) });
+    useSocket({ [EVENTS.NEW_MESSAGE]: (data) => setMessage((prev) => [...prev, data]) });
 
     return (
         <VStack
