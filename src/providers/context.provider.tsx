@@ -1,5 +1,7 @@
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react';
-import { ChatHandler, IAuth, IStore, IStoreContext, IUser } from '../common/types';
+import { io, Socket } from 'socket.io-client';
+import { BASE_URL } from '../common/env';
+import { ChatHandler, IAuth, ISocketContext, IStore, IStoreContext, IUser } from '../common/types';
 
 const data = localStorage.getItem('currentUser');
 const currentUser = data ? (JSON.parse(data) as IUser) : null;
@@ -15,7 +17,15 @@ export const initialState: IStore = {
     },
 };
 
+const socket = io(BASE_URL, {
+    auth: { Authorization: `Bearer ${''}` },
+    withCredentials: true,
+});
+
+socket.on('connect', () => console.log('Con'));
+
 export const StoreContext = createContext<IStoreContext | null>(null);
+export const SocketContext = createContext<ISocketContext>({ socket });
 
 const Context: FC<{ children: ReactNode }> = ({ children }) => {
     const [store, setStore] = useState<IStore>(initialState);
@@ -37,7 +47,13 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
         [store, updateStore]
     );
 
-    return <StoreContext.Provider value={contextValue}>{children}</StoreContext.Provider>;
+    const socketContextValue = useMemo(() => ({ socket: socket as Socket }), [socket]);
+
+    return (
+        <StoreContext.Provider value={contextValue}>
+            <SocketContext.Provider value={socketContextValue}>{children}</SocketContext.Provider>
+        </StoreContext.Provider>
+    );
 };
 
 export default Context;

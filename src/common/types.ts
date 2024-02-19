@@ -1,3 +1,5 @@
+import { Socket } from 'socket.io-client';
+
 export enum EVENTS {
     AUTH = 'auth',
     NEW_CONVERSATION = 'new-conversation',
@@ -89,6 +91,10 @@ export interface IStore {
 export interface IStoreContext {
     store: IStore;
     updateStore: (payload: Partial<IStore>) => void;
+}
+
+export interface ISocketContext {
+    socket: Socket;
 }
 
 export interface IDelete {

@@ -2,18 +2,24 @@ import { Box, Button, FormControl, Input, InputGroup, InputRightElement } from '
 import { ChangeEventHandler, FC, KeyboardEventHandler, useState } from 'react';
 import { BsSendFill } from 'react-icons/bs';
 import { IMessage } from '../../common/types';
+import useStore from '../../hooks/useStore';
 
 interface IChatInput {
     handleSendMessage: (msg: IMessage) => void;
 }
 
 const ChatInput: FC<IChatInput> = ({ handleSendMessage }) => {
+    const { store } = useStore();
     const [message, setMessage] = useState('');
 
     const handleClick: ChangeEventHandler<HTMLInputElement> = (e) =>
         setMessage(e.currentTarget.value);
     const handleSubmit = () => {
-        const data: IMessage = { body: message, senderId: '22', timestamp: new Date() };
+        const data: IMessage = {
+            body: message,
+            senderId: String(store.currentUser?.id),
+            timestamp: new Date(),
+        };
 
         handleSendMessage(data);
         setMessage('');

@@ -9,8 +9,6 @@ interface IChatView {
     messages: Array<IMessage>;
 }
 
-const currentUser = '22';
-
 const ChatView: FC<IChatView> = ({ messages }) => {
     const { store } = useStore();
 
@@ -26,7 +24,7 @@ const ChatView: FC<IChatView> = ({ messages }) => {
                     pr="10px"
                 >
                     {messages.map(({ body, senderId, timestamp }) => {
-                        const isCurrentUser = currentUser === senderId;
+                        const isCurrentUser = store.currentUser?.id === senderId;
                         return (
                             <HStack
                                 key={`${senderId}-${timestamp}`}
