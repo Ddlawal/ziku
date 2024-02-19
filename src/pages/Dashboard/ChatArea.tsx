@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react';
+import { Box, VStack } from '@chakra-ui/react';
 import { FC, useCallback, useEffect, useState } from 'react';
 
 import ChatInput from './ChatInput';
@@ -33,8 +33,12 @@ const ChatArea: FC = () => {
             rounded="10px"
             px={{ base: '5%', md: '15%' }}
         >
-            <ChatView messages={messages} />
-            <ChatInput handleSendMessage={handleSendMessage} />
+            <Box h="90%" w="full">
+                <ChatView messages={messages} />
+            </Box>
+            <Box w="full">
+                <ChatInput handleSendMessage={handleSendMessage} />
+            </Box>
         </VStack>
     );
 };
