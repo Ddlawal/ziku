@@ -1,7 +1,7 @@
 import {
     Tabs,
     TabList,
-    Tab,
+    // Tab,
     HStack,
     Menu,
     MenuButton,
@@ -20,23 +20,23 @@ import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import { logoutRequest } from '../../apis/auth';
-import { ChatHandler, PAGE_ROUTES } from '../../common/types';
+// import { ChatHandler, PAGE_ROUTES } from '../../common/types';
 import useLocalMutation from '../../hooks/useLocalMutation';
 import useStore from '../../hooks/useStore';
 
 const Navbar: FC = () => {
     const navigate = useNavigate();
-    const { store, updateStore } = useStore();
+    const { store } = useStore();
 
-    const setChatHandler = (handler: ChatHandler) => {
-        updateStore({ chatHandler: handler });
+    // const setChatHandler = (handler: ChatHandler) => {
+    //     updateStore({ chatHandler: handler });
 
-        if (handler === ChatHandler.BOT) {
-            navigate(PAGE_ROUTES.BOT_CHAT);
-        } else {
-            navigate(PAGE_ROUTES.HUMAN_CHAT);
-        }
-    };
+    //     if (handler === ChatHandler.BOT) {
+    //         navigate(PAGE_ROUTES.BOT_CHAT);
+    //     } else {
+    //         navigate(PAGE_ROUTES.HUMAN_CHAT);
+    //     }
+    // };
     const { mutate } = useLocalMutation({
         mutationFn: () => logoutRequest(),
         onSuccess: () => {
@@ -46,10 +46,11 @@ const Navbar: FC = () => {
     });
 
     const logout = () => mutate({});
+
     return (
         <Tabs h="85vh" maxH="45rem" w="full" size="md" variant="enclosed">
             <TabList h="5%" border="none" mb="0">
-                <Tab
+                {/* <Tab
                     _selected={{
                         border: '1px solid #8C8792',
                         borderBottom: 'none',
@@ -59,8 +60,8 @@ const Navbar: FC = () => {
                     onClick={() => setChatHandler(ChatHandler.BOT)}
                 >
                     Ziku
-                </Tab>
-                <Tab
+                </Tab> */}
+                {/* <Tab
                     _selected={{
                         border: '1px solid #8C8792',
                         borderBottom: 'none',
@@ -70,7 +71,7 @@ const Navbar: FC = () => {
                     onClick={() => setChatHandler(ChatHandler.HUMAN)}
                 >
                     PSychic
-                </Tab>
+                </Tab> */}
                 <HStack w="full" justifyContent="end" spacing={3}>
                     <Menu>
                         <MenuButton as={Button} p={0} bg="transparent" _hover={{}} _active={{}}>
@@ -89,13 +90,13 @@ const Navbar: FC = () => {
                             </HStack>
                         </MenuButton>
                         <MenuList color="primary">
-                            <MenuItem>
+                            <MenuItem cursor="pointer">
                                 <HStack spacing={3} w="full">
                                     <IoSettingsOutline size={20} />
                                     <Text>Settings</Text>
                                 </HStack>
                             </MenuItem>
-                            <MenuItem onClick={logout}>
+                            <MenuItem onClick={logout} cursor="pointer">
                                 <HStack spacing={3} w="full">
                                     <IoLogOutOutline size={20} />
                                     <Text>Logout</Text>

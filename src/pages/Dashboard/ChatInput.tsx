@@ -44,6 +44,7 @@ const ChatInput: FC<IChatInput> = ({ handleSendMessage }) => {
                         type={'text'}
                         placeholder="Type here..."
                         bg="bg"
+                        fontSize="12px"
                         color="white"
                         _focusVisible={{}}
                         value={message}
