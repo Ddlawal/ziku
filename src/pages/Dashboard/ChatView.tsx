@@ -1,9 +1,10 @@
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
-import { FC } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 
-import { ChatHandler, IMessage } from '../../common/types';
+import { ChatHandler, EVENTS, IMessage } from '../../common/types';
 import useStore from '../../hooks/useStore';
+import useSocketEvent from '../../hooks/useSocketEvent';
 
 interface IChatView {
     messages: Array<IMessage>;
@@ -11,6 +12,25 @@ interface IChatView {
 
 const ChatView: FC<IChatView> = ({ messages }) => {
     const { store } = useStore();
+    const [isTyping, setIsTyping] = useState(false);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    // Function to scroll to the bottom of the chat view
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    useEffect(() => {
+        // Scroll to the bottom whenever messages change
+        scrollToBottom();
+    }, [messages]);
+
+    useSocketEvent([
+        {
+            name: EVENTS.TYPING,
+            cb: (data) => setIsTyping(data),
+        },
+    ]);
 
     return (
         <VStack h="full" w="full" justifyContent="end">
@@ -35,15 +55,11 @@ const ChatView: FC<IChatView> = ({ messages }) => {
                                     maxW="80%"
                                     px="10px"
                                     py="4px"
-                                    bg={isCurrentUser ? '#44447F' : '#191919'}
+                                    bg={isCurrentUser ? '#363665' : '#191919'}
                                     rounded="10px"
                                     alignItems="start"
                                     spacing={0}
-                                    // _after={{
-                                    //     content: '',
-                                    //     h: '30px',
-                                    //     w: '30px',
-                                    // }}
+                                    border={`1px solid ${isCurrentUser ? '#696998' : '#464646'}`}
                                 >
                                     <Text fontSize="sm">{body}</Text>
                                     <Text fontSize="10px" ml="auto">
@@ -53,6 +69,15 @@ const ChatView: FC<IChatView> = ({ messages }) => {
                             </HStack>
                         );
                     })}
+
+                    <Box>
+                        {isTyping && (
+                            <Text w="full" textAlign="left">
+                                Loading...
+                            </Text>
+                        )}
+                    </Box>
+                    <Box ref={messagesEndRef} />
                 </Box>
             ) : (
                 <VStack h="full" justifyContent="center">

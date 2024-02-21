@@ -10,15 +10,15 @@ import { theme } from './styles/theme';
 import LocalQueryClientProvider from './providers/queryClient.provider';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <ChakraProvider theme={theme}>
-            <BrowserRouter>
-                <LocalQueryClientProvider>
-                    <Context>
-                        <App />
-                    </Context>
-                </LocalQueryClientProvider>
-            </BrowserRouter>
-        </ChakraProvider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <ChakraProvider theme={theme}>
+        <BrowserRouter>
+            <LocalQueryClientProvider>
+                <Context>
+                    <App />
+                </Context>
+            </LocalQueryClientProvider>
+        </BrowserRouter>
+    </ChakraProvider>
+    // </React.StrictMode>
 );

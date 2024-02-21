@@ -160,7 +160,7 @@ export const theme = extendTheme({
     styles: {
         global: () => ({
             body: {
-                fontFamily: "Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
+                fontFamily: "monospace, Cochin, Georgia, Times, 'Times New Roman', serif",
                 lineHeight: 1.5,
                 fontWeight: 400,
 
