@@ -49,11 +49,11 @@ const ChatView: FC<IChatView> = ({ messages }) => {
                     pr="10px"
                     ref={messagesEndRef}
                 >
-                    {messages.map(({ body, senderId, timestamp }) => {
+                    {messages.map(({ body, senderId, timestamp }, index) => {
                         const isCurrentUser = store.currentUser?.id === senderId;
                         return (
                             <HStack
-                                key={`${senderId}-${timestamp}`}
+                                key={`${senderId}-${timestamp}-${index}`}
                                 justifyContent={isCurrentUser ? 'end' : 'start'}
                                 mb="4px"
                             >

@@ -17,10 +17,7 @@ export const initialState: IStore = {
     },
 };
 
-const socket = io(BASE_URL, {
-    auth: { Authorization: `Bearer ${''}` },
-    withCredentials: true,
-});
+const socket = io(BASE_URL, { withCredentials: true });
 
 socket.on('connect', () => console.log('Con'));
 
