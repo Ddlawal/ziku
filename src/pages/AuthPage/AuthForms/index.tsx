@@ -6,7 +6,7 @@ import Logo from '../../../components/Logo';
 
 const AuthForms: FC = () => {
     return (
-        <Box h="100vh" px="10" py="16" w="full">
+        <Box h="100vh" maxH="full" px="10" py="16" w="full">
             <VStack alignItems="start" h="full" justifyContent="center">
                 <Center w="full" mb="10">
                     <VStack>

@@ -143,7 +143,7 @@ const SignUpForm: FC = () => {
                             _active={{}}
                             onClick={handleClick}
                         >
-                            {show ? <PiEyeClosedBold /> : <PiEyeBold />}
+                            {show ? <PiEyeClosedBold color="grey" /> : <PiEyeBold color="grey" />}
                         </Button>
                     </InputRightElement>
                 </InputGroup>

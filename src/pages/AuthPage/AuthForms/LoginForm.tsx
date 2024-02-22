@@ -72,7 +72,7 @@ const LoginForm: FC = () => {
                             _active={{}}
                             onClick={handleClick}
                         >
-                            {show ? <PiEyeClosedBold color="white" /> : <PiEyeBold color="white" />}
+                            {show ? <PiEyeClosedBold color="grey" /> : <PiEyeBold color="grey" />}
                         </Button>
                     </InputRightElement>
                 </InputGroup>

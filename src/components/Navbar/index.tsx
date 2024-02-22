@@ -50,7 +50,13 @@ const Navbar: FC = () => {
     const logout = () => mutate({});
 
     return (
-        <Tabs h="85vh" maxH="45rem" w="full" size="md" variant="enclosed">
+        <Tabs
+            h={{ base: 'full', md: '85%' }}
+            maxH={{ base: '95%', md: '45rem' }}
+            w="full"
+            size="md"
+            variant="enclosed"
+        >
             <TabList h="5%" border="none" mb="0">
                 {/* <Tab
                     _selected={{
