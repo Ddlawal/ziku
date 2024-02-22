@@ -83,7 +83,14 @@ const Navbar: FC = () => {
                 <HStack w="full" justifyContent="end" spacing={3}>
                     <Menu>
                         <Box h="3" w="3" rounded="full" bg={isConnected ? 'green' : 'red'} />
-                        <MenuButton as={Button} p={0} bg="transparent" _hover={{}} _active={{}}>
+                        <MenuButton
+                            as={Button}
+                            bg="transparent"
+                            p={0}
+                            minW={0}
+                            _hover={{}}
+                            _active={{}}
+                        >
                             <HStack spacing={3} justifyContent="end">
                                 <Avatar w="1.2rem" h="1.2rem" />
                                 <Text
