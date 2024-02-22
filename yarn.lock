@@ -1297,6 +1297,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.56.0.tgz#ef20350fec605a7f7035a01764731b2de0f3782b"
   integrity sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==
 
+"@fontsource/montserrat@^5.0.16":
+  version "5.0.16"
+  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.0.16.tgz#caa1b11b1d0ee1d6a028a73cedb5b27f8d881242"
+  integrity sha512-g27g1cvkyVm74QM0HKOCnI4iifMqf/3cSJYedjbjtW/Ygb271qfDz5gGMJCl9MinD4nimDdENsU3K1vGR50S2Q==
+
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.14"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.14.tgz#d78e481a039f7566ecc9660b4ea7fe6b1fec442b"

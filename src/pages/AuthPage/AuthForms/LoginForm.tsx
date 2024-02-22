@@ -63,7 +63,7 @@ const LoginForm: FC = () => {
                         _focusVisible={{}}
                         {...register('password', { required: true })}
                     />
-                    <InputRightElement width="4.5rem">
+                    <InputRightElement width="2.5rem">
                         <Button
                             bg="transparent"
                             color="primary"
@@ -72,7 +72,7 @@ const LoginForm: FC = () => {
                             _active={{}}
                             onClick={handleClick}
                         >
-                            {show ? <PiEyeClosedBold /> : <PiEyeBold />}
+                            {show ? <PiEyeClosedBold color="white" /> : <PiEyeBold color="white" />}
                         </Button>
                     </InputRightElement>
                 </InputGroup>

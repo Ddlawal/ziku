@@ -22,11 +22,13 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { logoutRequest } from '../../apis/auth';
 // import { ChatHandler, PAGE_ROUTES } from '../../common/types';
 import useLocalMutation from '../../hooks/useLocalMutation';
+// import useSocket from '../../hooks/useSocket';
 import useStore from '../../hooks/useStore';
 
 const Navbar: FC = () => {
     const navigate = useNavigate();
     const { store } = useStore();
+    // const { isConnected } = useSocket();
 
     // const setChatHandler = (handler: ChatHandler) => {
     //     updateStore({ chatHandler: handler });
@@ -74,6 +76,7 @@ const Navbar: FC = () => {
                 </Tab> */}
                 <HStack w="full" justifyContent="end" spacing={3}>
                     <Menu>
+                        {/* <Text>{`${isConnected}`}</Text> */}
                         <MenuButton as={Button} p={0} bg="transparent" _hover={{}} _active={{}}>
                             <HStack spacing={3} justifyContent="end">
                                 <Avatar w="1.2rem" h="1.2rem" />

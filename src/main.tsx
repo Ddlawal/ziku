@@ -1,5 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -10,15 +10,15 @@ import { theme } from './styles/theme';
 import LocalQueryClientProvider from './providers/queryClient.provider';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    // <React.StrictMode>
-    <ChakraProvider theme={theme}>
-        <BrowserRouter>
-            <LocalQueryClientProvider>
-                <Context>
-                    <App />
-                </Context>
-            </LocalQueryClientProvider>
-        </BrowserRouter>
-    </ChakraProvider>
-    // </React.StrictMode>
+    <StrictMode>
+        <ChakraProvider theme={theme}>
+            <BrowserRouter>
+                <LocalQueryClientProvider>
+                    <Context>
+                        <App />
+                    </Context>
+                </LocalQueryClientProvider>
+            </BrowserRouter>
+        </ChakraProvider>
+    </StrictMode>
 );

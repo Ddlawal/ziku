@@ -16,12 +16,10 @@ const ChatView: FC<IChatView> = ({ messages }) => {
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    // Function to scroll to the bottom of the chat view
     const scrollToBottom = () => {
-        // messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
         const element = messagesEndRef.current;
-        console.log(element?.scrollHeight);
         const scrollHeight = element?.scrollHeight;
+
         element?.scrollTo({
             top: scrollHeight,
             behavior: 'smooth',
@@ -29,7 +27,6 @@ const ChatView: FC<IChatView> = ({ messages }) => {
     };
 
     useEffect(() => {
-        // Scroll to the bottom whenever messages change
         scrollToBottom();
     }, [messages, isTyping]);
 

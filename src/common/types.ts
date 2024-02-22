@@ -97,6 +97,10 @@ export interface ISocketContext {
     socket: Socket;
 }
 
+export interface IUseSocket extends ISocketContext {
+    isConnected: boolean;
+}
+
 export interface IDelete {
     url: string;
 }

@@ -10,10 +10,12 @@ const useSocketEvent = (
     const listenToEvents = useCallback(() => {
         if (events?.length) {
             events.forEach(({ name, cb }) => {
-                socket.on(name, (data) => {
-                    console.log('Received message from server:', data, name);
-                    cb(data);
-                });
+                const handler = (data: any) => cb(data);
+                socket.on(name, handler);
+
+                return () => {
+                    socket.off(name, handler);
+                };
             });
         }
     }, []);
