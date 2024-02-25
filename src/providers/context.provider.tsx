@@ -17,7 +17,11 @@ export const initialState: IStore = {
     },
 };
 
-const socket = io(BASE_URL, { withCredentials: true });
+const socket = io(BASE_URL, {
+    extraHeaders: { 'ngrok-skip-browser-warning': 'true' },
+    secure: true,
+    withCredentials: true,
+});
 
 socket.on('connect', () => console.log('Con'));
 
