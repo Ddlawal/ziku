@@ -19,7 +19,6 @@ export const initialState: IStore = {
 
 const socket = io(BASE_URL, {
     extraHeaders: { 'ngrok-skip-browser-warning': 'true' },
-    secure: true,
     withCredentials: true,
 });
 
