@@ -1,19 +1,19 @@
-import { Box, HStack, Text, VStack } from '@chakra-ui/react';
-import { FC, useEffect, useRef, useState } from 'react';
+import { Box, HStack, Skeleton, Text, VStack } from '@chakra-ui/react';
+import { FC, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 
-import { ChatHandler, EVENTS, IMessage } from '../../common/types';
+import { ChatHandler, IMessage } from '../../common/types';
 import useStore from '../../hooks/useStore';
-import useSocketEvent from '../../hooks/useSocketEvent';
 import { Comment } from 'react-loader-spinner';
 
 interface IChatView {
+    isPending: boolean;
+    isTyping: boolean;
     messages: Array<IMessage>;
 }
 
-const ChatView: FC<IChatView> = ({ messages }) => {
+const ChatView: FC<IChatView> = ({ isPending, isTyping, messages }) => {
     const { store } = useStore();
-    const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -30,12 +30,42 @@ const ChatView: FC<IChatView> = ({ messages }) => {
         scrollToBottom();
     }, [messages, isTyping]);
 
-    useSocketEvent([
-        {
-            name: EVENTS.TYPING,
-            cb: (data) => setIsTyping(data),
-        },
-    ]);
+    if (isPending) {
+        return (
+            <VStack h="full" w="full" justifyContent="end">
+                <Box
+                    w="full"
+                    maxH="35rem"
+                    overflowY="scroll"
+                    className="no-scrollbar"
+                    pos="relative"
+                    pr="10px"
+                    ref={messagesEndRef}
+                >
+                    {Array(3)
+                        .fill(0)
+                        .map((_, index) => {
+                            const isCurrentUser = index % 2 === 0;
+                            return (
+                                <HStack
+                                    key={`dummy-${index}`}
+                                    justifyContent={isCurrentUser ? 'end' : 'start'}
+                                    mb="16px"
+                                >
+                                    <Skeleton
+                                        endColor={isCurrentUser ? '#363665' : '#191919'}
+                                        h="2.5rem"
+                                        rounded="10px"
+                                        startColor={isCurrentUser ? '#696998' : '#464646'}
+                                        w="80%"
+                                    />
+                                </HStack>
+                            );
+                        })}
+                </Box>
+            </VStack>
+        );
+    }
 
     return (
         <VStack h="full" w="full" justifyContent="end">
@@ -49,11 +79,11 @@ const ChatView: FC<IChatView> = ({ messages }) => {
                     pr="10px"
                     ref={messagesEndRef}
                 >
-                    {messages.map(({ body, senderId, timestamp }, index) => {
+                    {messages.map(({ body, senderId, createdAt }, index) => {
                         const isCurrentUser = store.currentUser?.id === senderId;
                         return (
                             <HStack
-                                key={`${senderId}-${timestamp}-${index}`}
+                                key={`${senderId}-${createdAt}-${index}`}
                                 justifyContent={isCurrentUser ? 'end' : 'start'}
                                 mb="4px"
                             >
@@ -69,7 +99,7 @@ const ChatView: FC<IChatView> = ({ messages }) => {
                                 >
                                     <Text fontSize="12px">{body}</Text>
                                     <Text fontSize="10px" ml="auto">
-                                        {format(timestamp, 'hh:mm')}
+                                        {format(createdAt, 'hh:mm')}
                                     </Text>
                                 </VStack>
                             </HStack>

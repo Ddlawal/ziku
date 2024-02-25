@@ -28,10 +28,15 @@ export interface IResponse<D = any> {
 export type IEvents = keyof typeof EVENTS;
 export type IEventsData = Partial<Record<EVENTS, (data: any) => void>>;
 
-export interface IMessage {
+export interface IMessageData {
     body: string;
-    timestamp: Date;
     senderId: string;
+}
+
+export interface IMessage extends IMessageData {
+    conversationId: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface ILoginRequest {
@@ -69,12 +74,22 @@ export enum ChatHandler {
     BOT = 'bot',
 }
 
+export interface IConversation {
+    id: string;
+    userId: string;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string | null;
+}
+
 export interface IUser {
     email: string;
     firstName: string;
     fullName: string;
     id: string;
     lastName: string;
+    recentConversation?: IConversation;
 }
 
 export interface IAuth {

@@ -1,11 +1,11 @@
 import { Box, Button, FormControl, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { ChangeEventHandler, FC, KeyboardEventHandler, useState } from 'react';
 import { BsSendFill } from 'react-icons/bs';
-import { IMessage } from '../../common/types';
+import { IMessageData } from '../../common/types';
 import useStore from '../../hooks/useStore';
 
 interface IChatInput {
-    handleSendMessage: (msg: IMessage) => void;
+    handleSendMessage: (msg: IMessageData) => void;
 }
 
 const ChatInput: FC<IChatInput> = ({ handleSendMessage }) => {
@@ -15,10 +15,9 @@ const ChatInput: FC<IChatInput> = ({ handleSendMessage }) => {
     const handleClick: ChangeEventHandler<HTMLInputElement> = (e) =>
         setMessage(e.currentTarget.value);
     const handleSubmit = () => {
-        const data: IMessage = {
+        const data: IMessageData = {
             body: message,
             senderId: String(store.currentUser?.id),
-            timestamp: new Date(),
         };
 
         handleSendMessage(data);
