@@ -5,18 +5,17 @@ import { BASE_URL } from './env';
 import { IDelete, IGet, IPatch, IPost, IPut } from './types';
 
 const httpConfig = () => {
-    const http = axios.create({
+    const options = {
         baseURL: BASE_URL,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': true },
         withCredentials: true,
         withXSRFToken: true,
-    });
+    };
+    const http = axios.create(options);
 
     const httpMultipart = axios.create({
-        baseURL: BASE_URL,
-        headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
-        withXSRFToken: true,
+        ...options,
+        headers: { ...options.headers, 'Content-Type': 'multipart/form-data' },
     });
 
     // http.interceptors.response.use(
